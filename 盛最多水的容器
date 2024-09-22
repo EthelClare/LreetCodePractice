@@ -1,0 +1,80 @@
+class Solution {
+    //第一版
+    // public int maxArea(int[] height) {
+    //     int left;
+    //     int right;
+    //     int Vm = 0;
+    //     for(left=0, right= height.length-1; left<right; left++, right--){
+    //         int V1 = Integer.min(height[left], height[right]) * (right - left);
+    //         if(V1 > Vm){
+    //             Vm = V1;
+    //         }
+            
+    //         int V2 = Integer.min(height[left+1], height[right]) *(right - left -1);
+    //         if(V2 > Vm){
+    //             Vm = V2;
+    //         }
+            
+    //         int V3 = Integer.min(height[left], height[right-1]) *(right - left -1);
+    //         if(V3 > Vm){
+    //             Vm = V3;
+    //         }
+    //     }
+    //     return Vm;
+//         给定一个长度为 n 的整数数组 height 。有 n 条垂线，第 i 条线的两个端点是 (i, 0) 和 (i, height[i]) 。
+
+// 找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。
+
+// 返回容器可以储存的最大水量。
+
+// 说明：你不能倾斜容器。
+    // }
+    //第二版
+    // public int maxArea(int[] height) {
+    //     int leftBorder = 0;
+    //     int rightBorder = height.length - 1;
+    //     int Vm = 0;
+    //     int interval = 1;
+
+    //     for( ; interval <= height.length - 1; interval++){
+    //         int left = leftBorder;
+    //         int right = left + interval;
+
+    //         while (right <= rightBorder) {
+    //             int V1 = interval * Integer.min(height[left], height[right]);
+    //             if(V1 > Vm){
+    //                 Vm = V1;
+    //             }
+    //             left++;
+    //             right++;
+    //         }
+
+
+    //     }
+    //     return Vm;
+    // }
+
+    //使用双指针法来解决这个问题
+    public int maxArea(int[] height) {
+        int left = 0;
+        int right = height.length-1;
+        int Vm = 0;
+       
+
+
+        while(left < right){
+            int V = Math.min(height[left], height[right]) * (right - left);
+            Vm = Math.max(V, Vm);
+            
+            if(height[left] <= height[right]) {
+                left++;
+            } else { 
+                right--;
+            }
+
+        }
+        return Vm;
+    }
+
+
+}
